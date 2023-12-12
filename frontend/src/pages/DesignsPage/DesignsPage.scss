@@ -2,8 +2,13 @@
     background: linear-gradient(160deg, #000 14.16%, rgba(0, 0, 0, 0.85) 100%);
     display: flex;
     flex-direction: column;
-    align-items: center;
+    // align-items: center;
     // justify-content: center;
+}
+
+.designsPage__body__container{
+    display: flex;
+    align-items: center;
 }
 .designs_container{
     display: flex;

@@ -39,14 +39,14 @@ export function DesignsPage() {
                         // Получаем данные дизайнера
                         let designerResponse = await fetch(`http://localhost:3000/api/GetIntraUser/${design.id}`);
                         let designerData = await designerResponse.json();
-            
+
                         // Получаем фотографии дизайна
                         let photoResponse = await fetch(`http://localhost:3000/api/GetDesignPhoto/${design.photo_id}`);
                         let photoData = await photoResponse.json();
-            
+
                         // Создаем новый элемент DesignCard и добавляем его в массив
                         return (
-                            <DesignCard 
+                            <DesignCard
                                 DesignerName={designerData.name}
                                 DesignImage={photoData.photos[0]}
                                 DesignName={design.name}
@@ -54,7 +54,7 @@ export function DesignsPage() {
                             />
                         );
                     });
-            
+
                     // Дожидаемся выполнения всех промисов и рендерим все элементы DesignCard
                     Promise.all(designCards).then((completedCards) => {
                         ReactDOM.render(completedCards, container);
@@ -69,7 +69,10 @@ export function DesignsPage() {
     return (
         <div className="designsPage__body">
             <Header></Header>
-            <div className="designs_container"></div>
+            {/* <div className="designsPage__body__container"> */}
+                <div className="designs_container"></div>
+
+            {/* </div> */}
 
             <Footer></Footer>
         </div>
