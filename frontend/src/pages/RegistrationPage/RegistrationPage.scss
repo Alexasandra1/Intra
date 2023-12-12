@@ -4,7 +4,7 @@
     font-family: Montserrat;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    // align-items: center;
 }
 
 .registrationPage__body__intra{
@@ -21,9 +21,13 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    width: 80%;
+    width: 100%;
     // gap: 2.5rem;
     padding-bottom: 5vh;
+    align-items: center;
+}
+.registrationPage__body__formContainer__container{
+    width: 80%;
 }
 
 .logInPage__body__form__dont {

@@ -1,0 +1,26 @@
+.designCard {
+    width: 273px;
+    height: 338px;
+    display: flex;
+    flex-direction: column;
+    color: #FFF;
+    font-family: Montserrat;
+
+    .designCard__textBlock {
+        display: flex;
+        flex-direction: column;
+
+        .designCard__textBlock__nameDesign {
+            font-size: 18px;
+            font-weight: bolder;
+        }
+
+        .designCard__textBlock__nameDesigner {
+            font-size: 14px;
+        }
+
+        .designCard__textBlock__price {
+            font-size: 24px;
+        }
+    }
+}

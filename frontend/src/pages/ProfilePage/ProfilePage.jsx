@@ -1,17 +1,18 @@
 import React, { useNavigate, useState, useEffect } from "react"
+import ReactDOM from 'react-dom';
+// import { ReactDOM } from "react-router-dom";
 import { Header } from '../../shared/components/Header/Header';
 import { HeaderText } from '../../shared/components/HeaderText/HeaderText';
 // import { Button } from '../../shared/components/Button/Button';
 import avatar from "../../image/avatar.png"
 import card from "../../image/cardPic.png"
+import { DesignCard } from "../../shared/components/DesignCard/DesignCard"
 import Popup from 'reactjs-popup';
 import { Footer } from "../../shared/components/Footer/Footer";
-import './ProfilePage.scss'
 import toast from 'react-hot-toast';
+import './ProfilePage.scss'
 
 export function ProfilePage() {
-    // const [isPopupOpen, setPopupOpen] = useState(false); 
-    // const navigate = useNavigate();
     const [userData, setUserData] = useState(null);
     const [name, setName] = useState("");
     const [city, setCity] = useState("");
@@ -19,10 +20,60 @@ export function ProfilePage() {
     const [email, setEmail] = useState("");
     const [role, setRole] = useState("");
 
+    let id = localStorage.getItem('id');
     useEffect(() => {
+        async function getDesignsByDesignerId() {
+            // Получаем designer_id из localStorage
+
+
+            try {
+                // Выполняем GET-запрос к API
+                let response = await fetch(`http://localhost:3000/api/GetDesignByDesignerID/${id}`);
+
+                // Проверяем, успешно ли выполнен запрос
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                } else {
+                    // Преобразуем ответ в JSON
+                    let designs = await response.json();
+
+                    // Получаем контейнер для дизайнов
+                    let container = document.querySelector('.designs_container');
+
+                    // Очищаем контейнер
+                    container.innerHTML = '';
+
+                    let designCards = designs.map(async (design) => {
+                        // Получаем данные дизайнера
+                        let designerResponse = await fetch(`http://localhost:3000/api/GetIntraUser/${design.id}`);
+                        let designerData = await designerResponse.json();
+            
+                        // Получаем фотографии дизайна
+                        let photoResponse = await fetch(`http://localhost:3000/api/GetDesignPhoto/${design.photo_id}`);
+                        let photoData = await photoResponse.json();
+            
+                        // Создаем новый элемент DesignCard и добавляем его в массив
+                        return (
+                            <DesignCard 
+                                DesignerName={designerData.name}
+                                DesignImage={photoData.photos[0]}
+                                DesignName={design.name}
+                                DesignPrice={design.price}
+                            />
+                        );
+                    });
+            
+                    // Дожидаемся выполнения всех промисов и рендерим все элементы DesignCard
+                    Promise.all(designCards).then((completedCards) => {
+                        ReactDOM.render(completedCards, container);
+                    });
+                }
+            } catch (error) {
+                console.error('Ошибка:', error);
+            }
+        }
+
         const fetchUserData = async () => {
-            const id = localStorage.getItem('id');
-            // const url = 'http://localhost:3000/api/GetIntraUser/' + id;
             try {
                 const response = await fetch(`http://localhost:3000/api/GetIntraUser/${id}`);
                 // const response = await fetch(url);
@@ -44,48 +95,26 @@ export function ProfilePage() {
         };
 
         fetchUserData();
+        getDesignsByDesignerId();
     }, []);
 
-    // const togglePopup = () => {
-    //     setPopupOpen((prevIsPopupOpen) => { НАМНОГО РАНЬШЕ ПРИЧЕМ
-    //         const profilePageBody = document.querySelector('.profilePage__body');
-
-    //         if (profilePageBody) {
-    //             if (!prevIsPopupOpen) {
-    //                 profilePageBody.classList.add('popup-open');
-    //             } else {
-    //                 profilePageBody.classList.remove('popup-open');
-    //             }
-    //         }
-
-    //         return !prevIsPopupOpen;
-    //     });
-    // };    
-
     return (
-        // <div className={`profilePage__body ${isPopupOpen ? "popup-open" : ""}`}>
         <div className="body">
             <Header ></Header>
-            {/* <Header onClick={handleAboutUsClick} handleAboutUsClick={handleAboutUsClick()} handleInstructionClick={handleInstructionClick()}></Header> */}
             <main className="profilePage__main">
                 <div className="profilePage__main__container">
                     <div className="profilePage__main__container__avatarka">
                         <div className="profilePage__main__container__avatarka__picture"><img src={avatar} alt="user" className="profilePage__main__container__avatarka__picture__img" /></div>
                         <div className="profilePage__main__container__avatarka__text">{name}
                             {/* Michael Snow */}
-                            </div>
+                        </div>
                     </div>
                     <div className="profilePage__main__container__button">
                         <div className="profilePage__main__container__button__myDesign">My Design</div>
                         {/* <button onClick={togglePopup}>Information</button> */}
                         <Popup trigger={
                             <button> Information </button>}
-                        // trigger={<button onClick={togglePopup}> Information </button>}
-                        //   open={isPopupOpen}
-                        //   onClose={togglePopup}
-                        //   closeOnDocumentClick
                         >
-
                             <div className="popup-content">
                                 <img src={avatar} alt="user" className="profilePage__main__container__avatarka__picture__img" />
                                 <p className="popupNameStyle">Name: {name}</p>
@@ -112,6 +141,7 @@ export function ProfilePage() {
                     </div>
                 </div>
             </main>
+            <div className="designs_container"></div>
             <Footer></Footer>
         </div>
     )

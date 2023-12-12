@@ -471,7 +471,16 @@ const swaggerDocument = {
                         "schema": {
                             "type": "object",
                             "properties": {
-                                "photos": { "type": "string" }
+                                "photos": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "photoProperty1": { "type": "string" }
+                                        },
+                                        "required": ["photoProperty1", "photoProperty2"]
+                                    }
+                                }
                             }
                         }
                     }
@@ -483,33 +492,88 @@ const swaggerDocument = {
                 }
             }
         },
+        
+        // "/api/PostDesignPhoto": {
+        //     "post": {
+        //         "summary": "Create design photo",
+        //         "parameters": [
+        //             {
+        //                 "in": "body",
+        //                 "name": "photo",
+        //                 "description": "Photo details",
+        //                 "required": true,
+        //                 "schema": {
+        //                     "type": "object",
+        //                     "properties": {
+        //                         "photos": { "type": "string" }
+        //                     }
+        //                 }
+        //             }
+        //         ],
+        //         "responses": {
+        //             "200": {
+        //                 "description": "Успешное добавление фото дизайна"
+        //             }
+        //         }
+        //     }
+        // },
         "/api/GetDesignPhoto/{id}": {
             "get": {
-                "summary": "Get design photo by ID",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "Photo ID to get",
-                        "required": true,
-                        "schema": {
-                            "type": "object",
-                            "properties": {
-                                "id": { "type": "integer" }
-                            }
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Успешное получение фото дизайна"
-                    },
-                    "404": {
-                        "description": "Фото дизайна не найдено"
-                    }
+              "summary": "Get design photo by ID",
+              "parameters": [
+                {
+                  "name": "id",
+                  "in": "path",
+                  "description": "Photo ID to get",
+                  "required": true,
+                  "schema": {
+                    "type": "integer"
+                  }
                 }
+              ],
+              "responses": {
+                "200": {
+                  "description": "Успешное получение фото дизайна",
+                  "content": {
+                    "image/*": {
+                      "example": "<base64-encoded-image-data>"
+                    }
+                  }
+                },
+                "404": {
+                  "description": "Фото дизайна не найдено"
+                }
+              }
             }
-        },
+          },
+          
+        // "/api/GetDesignPhoto/{id}": {
+        //     "get": {
+        //         "summary": "Get design photo by ID",
+        //         "parameters": [
+        //             {
+        //                 "name": "id",
+        //                 "in": "path",
+        //                 "description": "Photo ID to get",
+        //                 "required": true,
+        //                 "schema": {
+        //                     "type": "object",
+        //                     "properties": {
+        //                         "id": { "type": "integer" }
+        //                     }
+        //                 }
+        //             }
+        //         ],
+        //         "responses": {
+        //             "200": {
+        //                 "description": "Успешное получение фото дизайна"
+        //             },
+        //             "404": {
+        //                 "description": "Фото дизайна не найдено"
+        //             }
+        //         }
+        //     }
+        // },
         "/api/GetAllDesignPhoto": {
             "get": {
                 "summary": "Get all design photos",
