@@ -1,0 +1,67 @@
+.logInPage__body__form__password,
+.logInPage__body__form__login {
+    height: 74px;
+    background: transparent;
+    color: rgba(255, 255, 255, 0.70);
+    font-size: 32px;
+    font-family: Montserrat;
+    text-align: left;
+    border: 1px solid #fff;
+}
+
+.logInPage__body__form__login {
+    margin-bottom: 33px;
+}
+
+.logInPage__body__form__password{
+    margin-bottom: 51px;
+}
+
+// .registrationPage__body__form__login,
+// .registrationPage__body__form__password{
+//     // width: 70vh;
+// }
+
+// .registrationPage__body__form__name,
+// .registrationPage__body__form__city,
+// .registrationPage__body__form__email,
+//     .registrationPage__body__form__number{
+
+//     // width: 100%;
+// }
+
+.registrationPage__body__form__name,
+.registrationPage__body__form__login,
+.registrationPage__body__form__password,
+.registrationPage__body__form__city,
+.registrationPage__body__form__email,
+    .registrationPage__body__form__number{
+        width: 100%;
+    height: 4.625rem;
+    color: rgb(249, 250, 250);
+    background-color: transparent;
+    font-family: Montserrat;
+    font-size: 2rem;
+    border: 2px solid #ffffffe1;
+    margin-bottom: 2.06rem;
+    text-align: left;
+}
+
+
+.forgotPasswordForm__input{
+    width: 100%;
+    border: 2px solid black;
+    background-color: #cecece;
+    height: 4.625rem;
+    // color: rgb(249, 250, 250);
+    font-weight: bolder;
+    font-family: Montserrat;
+    font-size: 2rem;
+    margin-bottom: 2.06rem;
+    text-align: left;
+}
+
+.forgotPasswordForm__input::placeholder{
+    color: black;
+    font-weight: bolder;
+}

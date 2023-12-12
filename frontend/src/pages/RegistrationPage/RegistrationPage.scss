@@ -1,0 +1,51 @@
+.registrationPage__body{
+    background: linear-gradient(160deg, #000 14.16%, rgba(0, 0, 0, 0.85) 100%);
+    color: #FFF;
+    font-family: Montserrat;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.registrationPage__body__intra{
+    font-size: 96px;
+    padding: 3vh 0;
+}
+
+.registrationPage__body__createAccount {
+    font-size: 32px;
+    padding-bottom: 3.75rem;
+}
+
+.registrationPage__body__formContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 80%;
+    // gap: 2.5rem;
+    padding-bottom: 5vh;
+}
+
+.logInPage__body__form__dont {
+    padding-top: 2.06rem;
+}
+
+.logInPage__body__form__dont__sing {
+    color: #2D7C83;
+    ;
+}
+
+// .logInPage__body__form{
+//     color: #FFF;
+//     font-family: Montserrat;
+//     padding: 7vh 0 10vh 0;
+
+//     .logInPage__body__form__intra{
+//         font-size: 96px;
+//     }
+
+//     .logInPage__body__form__create{
+//         font-size: 32px;
+//         padding-bottom: 5vh;
+//     }
+// }

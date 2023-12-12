@@ -1,0 +1,33 @@
+.logInPage__body {
+    background: linear-gradient(160deg, #000 14.16%, rgba(0, 0, 0, 0.85) 100%);
+    color: #FFF;
+    font-family: Montserrat;
+
+}
+
+.logInPage__body__form {
+    font-family: Montserrat;
+    padding: 7vh 0 10vh 0;
+
+}
+
+.logInPage__body__intra {
+    font-size: 96px;
+    padding-bottom: 3vh;
+}
+
+.logInPage__body__create {
+    font-size: 32px;
+    padding-bottom: 10vh;
+}
+
+.logInPage__body__form__dont {
+    padding-top: 2.06rem;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.logInPage__body__form__dont__sing {
+    color: #f5bef9;
+}

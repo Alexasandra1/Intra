@@ -1,0 +1,42 @@
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    justify-content: center;
+}
+.registration{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    width: 860px;
+}
+
+.registrationPage__body__formContainer__secondForm,
+.registrationPage__body__formContainer__thirdForm{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    justify-content: space-between;
+}
+
+@media (max-width: 740px) {
+    .registration{
+        width: 400px;
+    }
+
+    .registrationPage__body__formContainer__secondForm,
+.registrationPage__body__formContainer__thirdForm{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+  }
+  
+  @media (max-width: 340px) {
+    .registration{
+        width: 300px;
+    }
+    .form{
+        width: 300px;
+    }
+  }

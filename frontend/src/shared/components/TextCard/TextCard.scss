@@ -1,0 +1,31 @@
+.card {
+    display: flex;
+    flex-direction: column;
+    color: #FFF;
+    font-family: Montserrat;
+
+    .aboutUs__main__containerFirst__title {
+        font-size: 50px;
+        font-weight: 600;
+        padding-bottom: 5vh;
+        text-align: left;
+    }
+
+    .aboutUs__main__containerFirst__description
+     {
+        font-size: 24px;
+        text-align: left;
+    }
+}
+
+.aboutUs__main__containerSecond__description{
+    font-size: 24px;
+    text-align: right;
+}
+
+.aboutUs__main__containerSecond__title {
+    font-size: 50px;
+    font-weight: 600;
+    padding-bottom: 5vh;
+    text-align: right;
+}

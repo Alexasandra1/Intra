@@ -1,0 +1,21 @@
+.cardImg{
+    display: flex;
+    flex-direction: column;
+    // flex-wrap: wrap;
+    width: 50vh;
+    margin: 0 3vh;
+    align-items: center;
+}
+
+.main-image{
+    width: 320px;
+    height: 510px;
+}
+
+.mainPage__main__container__text{
+    padding-top: 2vh;
+    width: 320px;
+    color: #FFF;
+    font-family: Montserrat;
+    font-size: 20px;
+}
