@@ -7,7 +7,7 @@ import { DesignCard } from "../../shared/components/DesignCard/DesignCard"
 import { Input } from "../../shared/components/Input/Input";
 import { Button } from '../../shared/components/Button/Button';
 import { Form } from '../../shared/components/Form/Form';
-import { ForgotPasswordModal } from '../../shared/components/ForgotPasswordModal/ForgotPasswordModal';
+import { Link } from "react-router-dom";
 
 import toast from 'react-hot-toast';
 
@@ -46,12 +46,14 @@ export function DesignsPage() {
 
                         // Создаем новый элемент DesignCard и добавляем его в массив
                         return (
+                            // <Link to={`/desihb/${design.id}`} keu={design.id}>
                             <DesignCard
                                 DesignerName={designerData.name}
                                 DesignImage={photoData.photos[0]}
                                 DesignName={design.name}
                                 DesignPrice={design.price}
                             />
+                            // </Link>
                         );
                     });
 

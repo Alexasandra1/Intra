@@ -1,10 +1,9 @@
 import React, { useNavigate, useState, useEffect } from "react"
 import ReactDOM from 'react-dom';
-// import { ReactDOM } from "react-router-dom";
 import { Header } from '../../shared/components/Header/Header';
+import { Button } from '../../shared/components/Button/Button';
 import { HeaderText } from '../../shared/components/HeaderText/HeaderText';
-// import { Button } from '../../shared/components/Button/Button';
-import avatar from "../../image/avatar.png"
+import avatar_q from "../../image/avatar.png"
 import card from "../../image/cardPic.png"
 import { DesignCard } from "../../shared/components/DesignCard/DesignCard"
 import Popup from 'reactjs-popup';
@@ -20,33 +19,49 @@ export function ProfilePage() {
     const [email, setEmail] = useState("");
     const [role, setRole] = useState("");
 
+    const [img, setImg] = React.useState(null);
+    const [avatar, setAvatar] = React.useState(null);
+
     let id = localStorage.getItem('id');
+
+    const sendFile = React.useCallback(async()=>{
+        try{
+            const formData = new FormData()
+
+            formData.append('avatar', img);
+            // formData.append(`filename`, `${id}.png`);
+
+            await fetch('http://localhost:3000/api/UploadAvatar',{
+                method:'POST',
+                headers:{
+                    'content-type':'mulpipart/form-data'
+                },
+                body: formData
+        
+            })
+            .then(res=>setAvatar(res.data.path))
+        }catch(error){}
+     },[img])
+
     useEffect(() => {
         async function getDesignsByDesignerId() {
 
             try {
-                // Выполняем GET-запрос к API
                 let response = await fetch(`http://localhost:3000/api/GetDesignByDesignerID/${id}`);
 
-                // Проверяем, успешно ли выполнен запрос
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 } else {
-                    // Преобразуем ответ в JSON
                     let designs = await response.json();
 
-                    // Получаем контейнер для дизайнов
                     let container = document.querySelector('.designs_container');
 
-                    // Очищаем контейнер
                     container.innerHTML = '';
 
                     let designCards = designs.map(async (design) => {
-                        // Получаем данные дизайнера
                         let designerResponse = await fetch(`http://localhost:3000/api/GetIntraUser/${design.id}`);
                         let designerData = await designerResponse.json();
             
-                        // Получаем фотографии дизайна
                         let photoResponse = await fetch(`http://localhost:3000/api/GetDesignPhoto/${design.photo_id}`);
                         let photoData = await photoResponse.json();
             
@@ -102,7 +117,17 @@ export function ProfilePage() {
             <main className="profilePage__main">
                 <div className="profilePage__main__container">
                     <div className="profilePage__main__container__avatarka">
-                        <div className="profilePage__main__container__avatarka__picture"><img src={avatar} alt="user" className="profilePage__main__container__avatarka__picture__img" /></div>
+                        <div className="profilePage__main__container__avatarka__picture">
+                                {
+                                avatar
+                                    ? <img src={avatar} alt="user" className="profilePage__main__container__avatarka__picture__img" />
+                                    : <img src={avatar_q} alt="user" className="profilePage__main__container__avatarka__picture__img" />
+                                }
+                            </div>
+                            <input type="file" onChange={e => {
+                                 setImg(e.target.files[0]);
+                            }} />
+                            <Button wordButton="kjgkj" onClick={sendFile}/>
                         <div className="profilePage__main__container__avatarka__text">{name}
                             {/* Michael Snow */}
                         </div>
@@ -114,28 +139,16 @@ export function ProfilePage() {
                             <button> Information </button>}
                         >
                             <div className="popup-content">
-                                <img src={avatar} alt="user" className="profilePage__main__container__avatarka__picture__img" />
+                                <img src={avatar_q} alt="user" className="profilePage__main__container__avatarka__picture__img" />
                                 <p className="popupNameStyle">Name: {name}</p>
-                                {/* <p className="popupStyle">Role: {role}</p> */}
                                 <p className="popupStyle">Phone: {phone}</p>
                                 <p className="popupStyle">Email: {email}</p>
                                 <p className="popupStyle">City: {city}</p>
-                                {/* <HeaderText style="popupNameStyle" word="Michael Snow" />
-                                <HeaderText style="popupStyle" word="Role: Designer" />
-                                <HeaderText style="popupStyle" word="Phone: +375293222222" />
-                                <HeaderText style="popupStyle" word="Email: michael@mail.ru" />
-                                <HeaderText style="popupStyle" word="City: London" /> */}
-                            </div>
+                              </div>
                         </Popup>
                     </div>
                     <div className="profilePage__main__container__card">
                         <div className="profilePage__main__container__card__picture"><img src={card} alt="design" className="profilePage__main__container__card__picture__img" /></div>
-                        {/* <div className="mainpage__main__container__card__descroption">Do you want to transform your living space into a beautiful and functional environment? Whether you need to redecorate your home, office, we can help you achieve your vision.</div> */}
-                        {/* <Popup trigger=
-                            {<button> Click to open popup </button>}
-                            position="right center">
-                                <HeaderText style="popupStyle" word="popud was opened"/>
-                        </Popup> */}
                     </div>
                 </div>
             </main>

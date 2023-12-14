@@ -27,7 +27,7 @@
 
 }
 
-.forgotPasswordForm__button{
+.forgotPasswordForm__button {
     border: 2px solid white;
     font-size: 32px;
     font-family: Montserrat;
@@ -37,4 +37,15 @@
     background-color: transparent;
     font-weight: bolder;
     color: white;
+}
+
+.informationDesign__button {
+    background-color: transparent;
+    color: rgba(255, 255, 255, 0.99);
+    text-align: center;
+    font-family: Montserrat;
+    font-size: 32px;
+    border: 2px solid white;
+    width: 310px;
+    height: 74px;
 }

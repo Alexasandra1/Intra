@@ -8,6 +8,7 @@ export function TextBlocInInformationDesign(props){
       <p className={`textBlocInInformationDesign__block__designer`}>Designer: {props.designerStyleTextBlocInInformationDesign}</p>
       <p className={`textBlocInInformationDesign__block__style`}>Style: {props.styleStyleTextBlocInInformationDesign}</p>
       <p className={`textBlocInInformationDesign__block__year`}>Year: {props.yearStyleTextBlocInInformationDesign}</p>
+      <p className={`textBlocInInformationDesign__block__price`}>Price: {props.priceStyleTextBlocInInformationDesign}</p>
     </div>
   );
 }
