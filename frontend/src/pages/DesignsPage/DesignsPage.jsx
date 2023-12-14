@@ -30,7 +30,7 @@ export function DesignsPage() {
                     let designs = await response.json();
 
                     // Получаем контейнер для дизайнов
-                    let container = document.querySelector('.designs_container');
+                    let container = document.querySelector('.designsPage__designs_container');
 
                     // Очищаем контейнер
                     container.innerHTML = '';
@@ -69,10 +69,10 @@ export function DesignsPage() {
     return (
         <div className="designsPage__body">
             <Header></Header>
-            {/* <div className="designsPage__body__container"> */}
-                <div className="designs_container"></div>
+            <div className="designsPage__body__container">
+                <div className="designsPage__designs_container"></div>
 
-            {/* </div> */}
+            </div>/
 
             <Footer></Footer>
         </div>

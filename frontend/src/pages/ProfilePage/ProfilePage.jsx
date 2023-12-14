@@ -23,8 +23,6 @@ export function ProfilePage() {
     let id = localStorage.getItem('id');
     useEffect(() => {
         async function getDesignsByDesignerId() {
-            // Получаем designer_id из localStorage
-
 
             try {
                 // Выполняем GET-запрос к API
