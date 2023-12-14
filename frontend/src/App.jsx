@@ -1,6 +1,7 @@
 import React from 'react';
 import { MainPage } from "./pages/MainPage/MainPage";
 import { DesignsPage } from "./pages/DesignsPage/DesignsPage";
+import { InformationDesign } from "./pages/IndormationDesign/InformationDesign"
 import { FourPage } from "./pages/FourPage/FourPage";
 import { AboutUsPage } from "./pages/AboutUsPage/AboutUsPage";
 import { InstructionPage } from "./pages/InstructionPage/InstructionPage";
@@ -20,6 +21,7 @@ export class App extends React.Component {
           <Routes>
             <Route path="/main" element={<MainPage />} />
             <Route path="/design" element={<DesignsPage />} />
+            <Route path="/infdesign" element={<InformationDesign />} />
             <Route path="/aboutus" element={<AboutUsPage />} />
             <Route path="/instruction" element={<InstructionPage />} />
             <Route path="/profile" element={<ProfilePage />} />
