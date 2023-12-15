@@ -21,7 +21,6 @@ export function RegistrationPage() {
     const role_id = 1;
 
     const handleRegistration = async () => {
-        console.log('1')
         try {
             if (name.trim() === "" || login.trim() === "" || password.trim() === "" || city.trim() === "" || phone.trim() === "" || email.trim() === "") {
                 toast.error('Поля не должны быть пустыми');

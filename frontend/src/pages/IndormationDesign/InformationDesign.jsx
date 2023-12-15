@@ -4,13 +4,15 @@ import { TextBlocInInformationDesign } from '../../shared/components/TextBlocInI
 import { Button } from '../../shared/components/Button/Button';
 import { Header } from '../../shared/components/Header/Header';
 import { Footer } from "../../shared/components/Footer/Footer";
-import { OrderCard } from '../../shared/components/OrderCard/OrderCard'; // Импортируйте компонент OrderCard
+import { OrderCard } from '../../shared/components/OrderCard/OrderCard'; 
 import './InformationDesign.scss';
 
 export function InformationDesign() {
     const { id } = useParams();
     const [designInfo, setDesignInfo] = useState(null);
-    const [isOrderCardVisible, setIsOrderCardVisible] = useState(false); // Состояние для управления видимостью OrderCard
+    const [styleData, setStyleData] = useState(null);
+    const [designerData, setDesignerData] = useState(null);
+    const [isOrderCardVisible, setIsOrderCardVisible] = useState(false);
 
     useEffect(() => {
         async function fetchDesignInfo() {
@@ -19,9 +21,29 @@ export function InformationDesign() {
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
-
                 const designData = await response.json();
                 setDesignInfo(designData);
+
+                if (designData.style_id) {
+                    const styleResponse = await fetch(`http://localhost:3000/api/GetStyle/${designData.style_id}`);
+                    if (!styleResponse.ok) { 
+                        throw new Error(`HTTP error! status: ${styleResponse.status}`); 
+                    } 
+                    const styleData = await styleResponse.json();
+                    setStyleData(styleData);
+                }
+
+                
+                if (designData.designer_id) {
+                    const designerResponse = await fetch(`http://localhost:3000/api/GetIntraUser/${designData.designer_id}`);
+                    if (!designerResponse.ok) { 
+                        throw new Error(`HTTP error! status: ${designerResponse.status}`); 
+                    } 
+                    const designerData = await designerResponse.json();
+                    setDesignerData(designerData);
+                }
+
+
             } catch (error) {
                 console.error('Ошибка:', error);
             }
@@ -32,12 +54,10 @@ export function InformationDesign() {
         }
     }, [id]);
 
-    // Функция для открытия OrderCard
     const handleOrderButtonClick = () => {
         setIsOrderCardVisible(true);
     };
 
-    // Функция для закрытия OrderCard
     const handleCloseOrderCard = () => {
         setIsOrderCardVisible(false);
     };
@@ -49,11 +69,11 @@ export function InformationDesign() {
                 <div className="informationDesignmaincontainer">
                     <div className="informationDesignmaincontainer__pictures"></div>
                     <div className="informationDesignmaincontainer__textBlock">
-                        {designInfo && (
+                        {designInfo && styleData && designerData &&(
                             <TextBlocInInformationDesign
                                 titleStyleTextBlocInInformationDesign={designInfo.name}
-                                designerStyleTextBlocInInformationDesign={designInfo.designer_id}
-                                styleStyleTextBlocInInformationDesign={designInfo.style_id}
+                                designerStyleTextBlocInInformationDesign={designerData.name}
+                                styleStyleTextBlocInInformationDesign={styleData.style_name}
                                 yearStyleTextBlocInInformationDesign={designInfo.year}
                                 priceStyleTextBlocInInformationDesign={designInfo.price}
                             />
@@ -63,7 +83,7 @@ export function InformationDesign() {
                             wordButton="Order"
                             onClick={handleOrderButtonClick} // Добавьте обработчик события для кнопки
                         ></Button>
-                        {isOrderCardVisible && <OrderCard onClose={handleCloseOrderCard} />} {/* Покажите OrderCard, если isOrderCardVisible установлен в true */}
+                        {isOrderCardVisible && <OrderCard onClose={handleCloseOrderCard} design_id={designInfo.id} />} {/* Покажите OrderCard, если isOrderCardVisible установлен в true */}
                     </div>
                 </div>
             </main>

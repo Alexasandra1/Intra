@@ -5,7 +5,7 @@ import toast from 'react-hot-toast';
 
 import './OrderCard.scss'
 
-export function OrderCard({ isOpen, onClose }) {
+export function OrderCard({ isOpen, onClose,id }) {
     const [email, setEmail] = useState('');
     const [phone, setPhone] = useState('');
     const [name, setName] = useState('');
@@ -16,24 +16,60 @@ export function OrderCard({ isOpen, onClose }) {
     const handleClose = () => {
         onClose();
     };
+    const design_id = id;
 
-    const handlePasswordRecovery = async (e) => {
-        console.log(email);
-        if (email.trim() === "") {
-            toast.error('Поле не должны быть пустыми');
-            return
-        }
-        if (!isEmailValid) {
-                toast.error('Неверный формат почты');
-                return
-        }
-
-
+    const orderSend = async () => {
         try {
+            if (name.trim() === "" || phone.trim() === "" || email.trim() === "") {
+                toast.error('Поля не должны быть пустыми');
+            }
+
+            if (!isEmailValid || !isPhoneValid) {
+                if (!isEmailValid && !isPhoneValid) {
+                    toast.error('Неверный формат почты и номера')
+                }
+                else if (!isEmailValid) {
+                    toast.error('Неверный формат почты')
+                }
+                else {
+                    toast.error('Неверный формат номера')
+                }
+                return;
+            }
+            else {
+                const response = await fetch('http://localhost:3000/api/PostOrders', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        name,
+                        phone,
+                        email,
+                        design_id,
+                    }),
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    if (data.message) {
+                        toast.success(data.message);
+                    } else {
+                        toast.error(data.error);
+                    }
+                    onClose();
+                } else {
+                    const errorData = await response.json();
+                    toast.error(errorData.error);
+                }
+            }
         } catch (error) {
             console.error('Ошибка при отправке запроса:', error);
         }
     };
+
+    
+
 
     return (
         <div className="order">
@@ -46,7 +82,7 @@ export function OrderCard({ isOpen, onClose }) {
                         styleInput: 'orderContentForm__input',
                         value: name,
                         onChange: (e) => {
-                            setPhone(e.target.value);
+                            setName(e.target.value);
                         }
                     },
                     {
@@ -76,7 +112,7 @@ export function OrderCard({ isOpen, onClose }) {
                     styleButton="orderContent__button"
                     wordButton="Send order"
                     type="submit"
-                    onClick={handlePasswordRecovery}
+                    onClick={orderSend}
                 />
             </div>
             {/* )} */}
