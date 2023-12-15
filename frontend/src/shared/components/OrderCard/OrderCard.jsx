@@ -11,11 +11,9 @@ export function OrderCard({ isOpen, onClose }) {
     const [name, setName] = useState('');
     const [isEmailValid, setIsEmailValid] = useState(true);
     const [isPhoneValid, setIsPhoneValid] = useState(true);
-    // const [isResettingPassword, setIsResettingPassword] = useState(false);
     const [userData, setUserData] = useState(null);
 
     const handleClose = () => {
-        // setIsResettingPassword(false);
         onClose();
     };
 
@@ -32,82 +30,13 @@ export function OrderCard({ isOpen, onClose }) {
 
 
         try {
-            // const response = await fetch('http://localhost:3000/api/GetUserByEmail', {
-            //     method: 'POST',
-            //     headers: {
-            //         'Content-Type': 'application/json',
-            //     },
-            //     body: JSON.stringify({
-            //         email,
-            //     }),
-            // });
-
-            // if (response.ok) {
-            //     const userData = await response.json();
-            //     setUserData(userData);
-            //     // setIsResettingPassword(true);
-            // } else {
-            //     const errorData = await response.json();
-            //     toast.error(errorData.error);
-            // }
         } catch (error) {
             console.error('Ошибка при отправке запроса:', error);
         }
     };
 
-    // const resetPassword = async () => {
-    //     try {
-    //         const response = await fetch(`http://localhost:3000/api/PutIntraUser/${userData.id}`, {
-    //             method: 'PUT',
-    //             headers: {
-    //                 'Content-Type': 'application/json',
-    //             },
-    //             body: JSON.stringify({
-    //                 ...userData,
-    //                 password,
-    //             }),
-    //         });
-
-    //         if (response.ok) {
-    //             const updatedUser = await response.json();
-    //             console.log(updatedUser);
-    //             toast.success('Пароль изменен');
-    //             // setIsResettingPassword(false);
-    //             onClose();
-    //         } else {
-    //             const errorData = await response.json();
-    //             toast.error(errorData.error);
-    //         }
-    //     } catch (error) {
-    //         console.error('Ошибка при отправке запроса:', error);
-    //     }
-    // };
-
-    if (!isOpen) {
-        return null;
-    }
-
     return (
         <div className="order">
-            {/* {isResettingPassword ? (
-                <div className="order-content">
-                    <div className="close-button" onClick={handleClose}>X</div>
-                    <h2>Enter your new password</h2>
-                    <Form inputs={[
-                            { placeholder: '  Password',
-                                styleInput: 'forgotPasswordForm__input',
-                                value: password,
-                                onChange: e => setPassword(e.target.value),
-                                type: 'password',
-                            }]}/>
-                    <Button
-                        styleButton="forgotPasswordForm__button"
-                        wordButton="Reset password"
-                        type="submit"
-                        onClick={resetPassword}
-                    />
-                </div>
-            ) : ( */}
             <div className="order-content">
                 <div className="close-button" onClick={handleClose}>X</div>
                 <h2 className='order-content-intra'>INTRA</h2>
@@ -119,13 +48,6 @@ export function OrderCard({ isOpen, onClose }) {
                         onChange: (e) => {
                             setPhone(e.target.value);
                         }
-                        // onChange: (e) => {
-                        // setEmail(e.target.value);
-                        // setIsEmailValid(
-                        //         /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/.test(e.target.value)
-                        //     );
-                        // },
-                        // type: 'email',
                     },
                     {
                         placeholder: '  Phone',
@@ -138,7 +60,7 @@ export function OrderCard({ isOpen, onClose }) {
                         type: 'tel',
                     },
                     {
-                        placeholder: '  Name',
+                        placeholder: '  Email',
                         styleInput: 'orderContentForm__input',
                         value: email,
                         onChange: (e) => {

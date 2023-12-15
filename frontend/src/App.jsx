@@ -24,6 +24,9 @@ export class App extends React.Component {
             <Route path="/infdesign" element={<InformationDesign />} />
             <Route path="/aboutus" element={<AboutUsPage />} />
             <Route path="/instruction" element={<InstructionPage />} />
+            <Route path="/infDesign/:id" element={<InformationDesign />} />
+
+            {/* <Route path="/infDesign" element={<InformationDesign />} /> */}
             <Route path="/profile" element={<ProfilePage />} />
             <Route path="/login" element={<LogInPage />} />
             <Route path="/reg" element={<RegistrationPage />} />
