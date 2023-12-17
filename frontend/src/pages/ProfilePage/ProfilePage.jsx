@@ -1,5 +1,6 @@
-import React, { useNavigate, useState, useEffect } from "react"
+import React, { useState, useEffect } from "react"
 import ReactDOM from 'react-dom';
+import { useNavigate } from "react-router-dom";
 import { Header } from '../../shared/components/Header/Header';
 import { Button } from '../../shared/components/Button/Button';
 import { HeaderText } from '../../shared/components/HeaderText/HeaderText';
@@ -19,29 +20,38 @@ export function ProfilePage() {
     const [email, setEmail] = useState("");
     const [role, setRole] = useState("");
 
+    let navigate = useNavigate();
+
     const [img, setImg] = React.useState(null);
     const [avatar, setAvatar] = React.useState(null);
 
     let id = localStorage.getItem('id');
 
-    const sendFile = React.useCallback(async()=>{
-        try{
+
+async function navigateAndResetId() {
+        localStorage.setItem('id', 0);
+        localStorage.setItem('authorization', 0);
+        navigate('/main');
+    }
+
+    const sendFile = React.useCallback(async () => {
+        try {
             const formData = new FormData()
 
             formData.append('avatar', img);
             // formData.append(`filename`, `${id}.png`);
 
-            await fetch('http://localhost:3000/api/UploadAvatar',{
-                method:'POST',
-                headers:{
-                    'content-type':'mulpipart/form-data'
+            await fetch('http://localhost:3000/api/UploadAvatar', {
+                method: 'POST',
+                headers: {
+                    'content-type': 'mulpipart/form-data'
                 },
                 body: formData
-        
+
             })
-            .then(res=>setAvatar(res.data.path))
-        }catch(error){}
-     },[img])
+                .then(res => setAvatar(res.data.path))
+        } catch (error) { }
+    }, [img])
 
     useEffect(() => {
         async function getDesignsByDesignerId() {
@@ -61,21 +71,22 @@ export function ProfilePage() {
                     let designCards = designs.map(async (design) => {
                         let designerResponse = await fetch(`http://localhost:3000/api/GetIntraUser/${design.id}`);
                         let designerData = await designerResponse.json();
-            
+
                         let photoResponse = await fetch(`http://localhost:3000/api/GetDesignPhoto/${design.photo_id}`);
                         let photoData = await photoResponse.json();
-            
+
                         // Создаем новый элемент DesignCard и добавляем его в массив
                         return (
-                            <DesignCard 
+                            <DesignCard
                                 DesignerName={designerData.name}
                                 DesignImage={photoData.photos[0]}
                                 DesignName={design.name}
                                 DesignPrice={design.price}
+                                onClick={() => navigate(`/infDesign/${design.id}`)}
                             />
                         );
                     });
-            
+
                     // Дожидаемся выполнения всех промисов и рендерим все элементы DesignCard
                     Promise.all(designCards).then((completedCards) => {
                         ReactDOM.render(completedCards, container);
@@ -118,16 +129,16 @@ export function ProfilePage() {
                 <div className="profilePage__main__container">
                     <div className="profilePage__main__container__avatarka">
                         <div className="profilePage__main__container__avatarka__picture">
-                                {
+                            {
                                 avatar
                                     ? <img src={avatar} alt="user" className="profilePage__main__container__avatarka__picture__img" />
                                     : <img src={avatar_q} alt="user" className="profilePage__main__container__avatarka__picture__img" />
-                                }
-                            </div>
-                            <input type="file" onChange={e => {
-                                 setImg(e.target.files[0]);
-                            }} />
-                            <Button wordButton="kjgkj" onClick={sendFile}/>
+                            }
+                        </div>
+                        <input type="file" onChange={e => {
+                            setImg(e.target.files[0]);
+                        }} />
+                        <Button wordButton="kjgkj" onClick={sendFile} />
                         <div className="profilePage__main__container__avatarka__text">{name}
                             {/* Michael Snow */}
                         </div>
@@ -144,7 +155,8 @@ export function ProfilePage() {
                                 <p className="popupStyle">Phone: {phone}</p>
                                 <p className="popupStyle">Email: {email}</p>
                                 <p className="popupStyle">City: {city}</p>
-                              </div>
+                                <Button styleButton="logOutButton" wordButton="log out" onClick={() => navigateAndResetId()}></Button>
+                            </div>
                         </Popup>
                     </div>
                     <div className="profilePage__main__container__card">

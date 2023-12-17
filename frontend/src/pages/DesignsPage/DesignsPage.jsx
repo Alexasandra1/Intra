@@ -98,7 +98,7 @@ export function DesignsPage() {
                             DesignImage={design.DesignImage}
                             DesignName={design.DesignName}
                             DesignPrice={design.DesignPrice}
-                            onClick={design.onClick}
+                            onClick={() => navigate(`/infDesign/${design.id}`)}
                         />
                     ))}
                 </div>

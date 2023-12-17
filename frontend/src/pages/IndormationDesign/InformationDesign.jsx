@@ -5,6 +5,7 @@ import { Button } from '../../shared/components/Button/Button';
 import { Header } from '../../shared/components/Header/Header';
 import { Footer } from "../../shared/components/Footer/Footer";
 import { OrderCard } from '../../shared/components/OrderCard/OrderCard'; 
+import infDesign from "../../image/infDesign.png"
 import './InformationDesign.scss';
 
 export function InformationDesign() {
@@ -66,8 +67,10 @@ export function InformationDesign() {
         <div className="informationDesign__body">
             <Header></Header>
             <main className="informationDesign__main">
-                <div className="informationDesignmaincontainer">
-                    <div className="informationDesignmaincontainer__pictures"></div>
+                <div className="informationDesign__main__container">
+                    <div className="informationDesignmaincontainer__pictures">
+                        <img src={infDesign} alt="design" className="informationDesignmaincontainer__pictures__img"></img>
+                    </div>
                     <div className="informationDesignmaincontainer__textBlock">
                         {designInfo && styleData && designerData &&(
                             <TextBlocInInformationDesign
