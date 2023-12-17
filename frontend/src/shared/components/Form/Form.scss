@@ -19,6 +19,20 @@
     justify-content: space-between;
 }
 
+.addDesignPage__body__formContainer__container__firstForm{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding-bottom: 3%;
+}
+
+.addDesignPage__body__formContainer__secondForm{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding-bottom: 5%;
+}
+
 @media (max-width: 740px) {
     .registration{
         width: 400px;

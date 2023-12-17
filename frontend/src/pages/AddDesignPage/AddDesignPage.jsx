@@ -9,15 +9,15 @@ import toast from 'react-hot-toast';
 import './AddDesignPage.scss'
 
 export function AddDesignPage() {
-    // const navigate = useNavigate();
-    // const [designName, setDesignName] = useState('');
-    // const [price, setPrice] = useState('');
-    // const [designer, setDesigner] = useState('');
-    // const [style, setStyle] = useState('');
-    // const [year, setYear] = useState('');
-    // const [email, setEmail] = useState('');
-    // const [isEmailValid, setIsEmailValid] = useState(true);
-    // const [isPhoneValid, setIsPhoneValid] = useState(true);
+    const navigate = useNavigate();
+    const [designName, setDesignName] = useState('');
+    const [price, setPrice] = useState('');
+    const [designer, setDesigner] = useState('');
+    const [style, setStyle] = useState('');
+    const [year, setYear] = useState('');
+    const [email, setEmail] = useState('');
+    const [isEmailValid, setIsEmailValid] = useState(true);
+    const [isPhoneValid, setIsPhoneValid] = useState(true);
     // const role_id = 1;
 
     // const handleRegistration = async () => {
@@ -77,13 +77,13 @@ export function AddDesignPage() {
             <div className="addDesignPage__body">
                 <Header></Header>
 
-                {/* <div className="addDesignPage__body__formContainer">
+                <div className="addDesignPage__body__formContainer">
                     <div className="addDesignPage__body__formContainer__container">
-                        <Form inputs={[
+                        <Form formClass="addDesignPage__body__formContainer__container__firstForm" inputs={[
                             { placeholder: '  Design Name', styleInput: 'addDesignPage__body__form__designName', value: designName, onChange: e => setDesignName(e.target.value) },
                             { placeholder: '  Price', styleInput: 'addDesignPage__body__form__price', value: price, onChange: e => setPrice(e.target.value) }
                         ]} />
-                        <Form formClass="registrationPage__body__formContainer__secondForm" inputs={[
+                        <Form formClass="addDesignPage__body__formContainer__secondForm" inputs={[
                             { placeholder: '  Designer', styleInput: 'addDesignPage__body__form__designer', value: designer, onChange: e => setDesigner(e.target.value) },
                             { placeholder: '  Style', styleInput: 'addDesignPage__body__form__style', value: style, onChange: e => setStyle(e.target.value) },
                             { placeholder: '  Year', styleInput: 'addDesignPage__body__form__year', value: style, onChange: e => setYear(e.target.value) }
@@ -114,14 +114,14 @@ export function AddDesignPage() {
                                 type: 'tel',
                             }
                         ]} /> */}
-                    {/* </div> */}
-             {/* </div>  */}
-                 {/* <Button */}
-                {/* //     styleButton="addDesignPage__body__form__button"
-                //     wordButton="Save"
-                //     type="submit"
-                //     onClick={handleRegistration}
-                // /> */}
+                    </div>
+              </div> 
+                 <Button
+                     styleButton="addDesignPage__body__form__button"
+                    wordButton="Save"
+                    type="submit"
+                    // onClick={handleRegistration}
+                />
                 <Footer></Footer>
             </div>
         );

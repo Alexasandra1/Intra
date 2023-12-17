@@ -18,6 +18,7 @@ export function InformationDesign() {
     const [styleData, setStyleData] = useState(null);
     const [designerData, setDesignerData] = useState(null);
     const [isOrderCardVisible, setIsOrderCardVisible] = useState(false);
+    const [userData, setUserData] = useState(null);
 
     let navigate = useNavigate();
     let user_id = localStorage.getItem('id');
@@ -61,6 +62,15 @@ export function InformationDesign() {
                 const designData = await response.json();
                 setDesignInfo(designData);
 
+                if(user_id){
+                    const userResponse = await fetch(`http://localhost:3000/api/GetIntraUser/${user_id}`);
+                    if (!userResponse.ok) {
+                        throw new Error(`HTTP error! status: ${userResponse.status}`);
+                    }
+                    const userData = await userResponse.json();
+                    setUserData(userData);
+                }
+
                 if (designData.style_id) {
                     const styleResponse = await fetch(`http://localhost:3000/api/GetStyle/${designData.style_id}`);
                     if (!styleResponse.ok) {
@@ -99,6 +109,7 @@ export function InformationDesign() {
         setIsOrderCardVisible(false);
     };
 
+
     return (
         <div className="informationDesign__body">
             <Header></Header>
@@ -123,8 +134,8 @@ export function InformationDesign() {
                                 wordButton="Order"
                                 onClick={handleOrderButtonClick}
                             ></Button>
-                        {/* { (user_id === designerData.id || designerData.role_id === '2') && (
-<> */}
+                         { (user_id == designerData?.id || userData?.role_id == 2) && (
+<> 
                             
                             <Button
                                 styleButton="informationDesign__button__delete"
@@ -148,7 +159,7 @@ export function InformationDesign() {
                                     <button onClick={handleClose}>Cancel</button> */}
                                 </div>
                             </Popup>
-                            {/* </>)} */}
+                            </>)}
                         </div>
                         {isOrderCardVisible && <OrderCard onClose={handleCloseOrderCard} id={designInfo.id} />} {/* Покажите OrderCard, если isOrderCardVisible установлен в true */}
                     </div>
