@@ -158,10 +158,13 @@ export function ProfilePage() {
                                 <Button styleButton="logOutButton" wordButton="log out" onClick={() => navigateAndResetId()}></Button>
                             </div>
                         </Popup>
+                        <Button styleButton="addDesignButton" wordButton="Add Design" 
+                        // onClick={() => navigateAndResetId()}
+                        ></Button>
                     </div>
-                    <div className="profilePage__main__container__card">
+                    {/* <div className="profilePage__main__container__card">
                         <div className="profilePage__main__container__card__picture"><img src={card} alt="design" className="profilePage__main__container__card__picture__img" /></div>
-                    </div>
+                    </div> */}
                 </div>
             </main>
             <div className="designs_container"></div>

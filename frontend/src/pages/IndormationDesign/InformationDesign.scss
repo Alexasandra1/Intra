@@ -17,3 +17,19 @@
     display: flex;
     flex-direction: row;
 }
+
+
+h2{
+    color: rgb(170, 74, 74);
+}
+.popup__content{
+    position: absolute;
+    transform: translate(-50%, -59%);
+    background-color: rgb(57, 55, 55);
+    padding: 20px;
+    border-radius: 5px;
+}
+.popupToDelete{
+    color: azure;
+    font-family: Montserrat;
+}

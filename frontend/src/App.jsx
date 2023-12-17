@@ -6,6 +6,7 @@ import { FourPage } from "./pages/FourPage/FourPage";
 import { AboutUsPage } from "./pages/AboutUsPage/AboutUsPage";
 import { InstructionPage } from "./pages/InstructionPage/InstructionPage";
 import { RegistrationPage } from "./pages/RegistrationPage/RegistrationPage"
+import { AddDesignPage } from "./pages/AddDesignPage/AddDesignPage"
 import { ProfilePage } from "./pages/ProfilePage/ProfilePage";
 import { LogInPage } from "./pages/LogInPage/LogInPage"
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
@@ -25,6 +26,7 @@ export class App extends React.Component {
             <Route path="/aboutus" element={<AboutUsPage />} />
             <Route path="/instruction" element={<InstructionPage />} />
             <Route path="/infDesign/:id" element={<InformationDesign />} />
+            <Route path="/addDesign" element={<AddDesignPage />} />
 
             {/* <Route path="/infDesign" element={<InformationDesign />} /> */}
             <Route path="/profile" element={<ProfilePage />} />
