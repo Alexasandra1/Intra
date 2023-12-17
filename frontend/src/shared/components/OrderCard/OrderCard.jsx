@@ -22,6 +22,7 @@ export function OrderCard({ isOpen, onClose, id }) {
         try {
             if (customer_name.trim() === "" || customer_phone.trim() === "" || customer_email.trim() === "") {
                 toast.error('Поля не должны быть пустыми');
+                return
             }
 
             if (!isEmailValid || !isPhoneValid) {

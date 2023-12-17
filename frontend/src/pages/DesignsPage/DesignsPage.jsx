@@ -1,21 +1,16 @@
-// DesignsPage.js
 import React, { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom";
-import ReactDOM from 'react-dom';
 import { Header } from '../../shared/components/Header/Header';
 import { Footer } from "../../shared/components/Footer/Footer";
 import { DesignCard } from "../../shared/components/DesignCard/DesignCard"
 import { SelectFilter } from "../../shared/components/SelectFilter/SelectFilter";
-import { Input } from "../../shared/components/Input/Input";
-import { Button } from '../../shared/components/Button/Button';
-import { Form } from '../../shared/components/Form/Form';
-
 import './DesignsPage.scss'
 
 export function DesignsPage() {
     const [selectedStyle, setSelectedStyle] = useState("0");
     const [selectedYear, setSelectedYear] = useState("0");
     const [loading, setLoading] = useState(true);
+    const [designs, setDesigns] = useState([]);
 
     let navigate = useNavigate();
 
@@ -31,10 +26,6 @@ export function DesignsPage() {
             } else {
                 let designs = await response.json();
 
-                let container = document.querySelector('.designsPage__designs_container');
-
-                container.innerHTML = '';
-
                 let designCards = designs.map(async (design) => {
                     let designerResponse = await fetch(`http://localhost:3000/api/GetIntraUser/${design.id}`);
                     let designerData = await designerResponse.json();
@@ -42,22 +33,18 @@ export function DesignsPage() {
                     let photoResponse = await fetch(`http://localhost:3000/api/GetDesignPhoto/${design.photo_id}`);
                     let photoData = await photoResponse.json();
 
-                    return (
-                        <DesignCard
-                            DesignerName={designerData.name}
-                            DesignImage={photoData.photos[0]}
-                            DesignName={design.name}
-                            DesignPrice={design.price}
-                            onClick={() => navigate(`/infDesign/${design.id}`)}
-                        />
-                    );
+                    return {
+                        DesignerName: designerData.name,
+                        DesignImage: photoData.photos[0],
+                        DesignName: design.name,
+                        DesignPrice: design.price,
+                        onClick: () => navigate(`/infDesign/${design.id}`)
+                    };
                 });
 
                 Promise.all(designCards).then((completedCards) => {
-                    if (container) {
-                        ReactDOM.render(completedCards, container);
-                        setLoading(false);
-                    }
+                    setDesigns(completedCards);
+                    setLoading(false);
                 });
             }
         } catch (error) {
@@ -96,14 +83,25 @@ export function DesignsPage() {
             <SelectFilter
                 optionWordName="Year"
                 optionWord="earlier"
-                optionWord2="later"
+                // optionWord2="later"
                 value={selectedYear}
                 onChange={handleYearChange}
             />
 
             <div className="designsPage__body__container">
                 <button onClick={handleResetFilters}>Reset Filters</button>
-                <div className="designsPage__designs_container"></div>
+                <div className="designsPage__designs_container">
+                    {designs.map((design, index) => (
+                        <DesignCard
+                            key={index}
+                            DesignerName={design.DesignerName}
+                            DesignImage={design.DesignImage}
+                            DesignName={design.DesignName}
+                            DesignPrice={design.DesignPrice}
+                            onClick={design.onClick}
+                        />
+                    ))}
+                </div>
             </div>
             <Footer />
         </div>
