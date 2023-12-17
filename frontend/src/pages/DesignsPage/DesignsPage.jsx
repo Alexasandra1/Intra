@@ -4,6 +4,7 @@ import { Header } from '../../shared/components/Header/Header';
 import { Footer } from "../../shared/components/Footer/Footer";
 import { DesignCard } from "../../shared/components/DesignCard/DesignCard"
 import { SelectFilter } from "../../shared/components/SelectFilter/SelectFilter";
+import { Button } from '../../shared/components/Button/Button';
 import './DesignsPage.scss'
 
 export function DesignsPage() {
@@ -73,23 +74,29 @@ export function DesignsPage() {
     return (
         <div className="designsPage__body">
             <Header />
-            <SelectFilter
-                optionWordName="Style"
-                optionWord="modern"
-                optionWord2="minimalism"
-                value={selectedStyle}
-                onChange={handleStyleChange}
-            />
-            <SelectFilter
-                optionWordName="Year"
-                optionWord="earlier"
-                // optionWord2="later"
-                value={selectedYear}
-                onChange={handleYearChange}
-            />
+            <div className="designsPage__body__select">
+                <SelectFilter
+                    optionWordName="Style"
+                    optionWord="modern"
+                    optionWord2="minimalism"
+                    value={selectedStyle}
+                    onChange={handleStyleChange}
+                />
+                <SelectFilter
+                    optionWordName="Year"
+                    optionWord="earlier"
+                    // optionWord2="later"
+                    value={selectedYear}
+                    onChange={handleYearChange}
+                />
+                    <Button
+                            styleButton="designsPage__body__select__delete"
+                            wordButton="Reset Filters"
+                            onClick={handleResetFilters}
+                        ></Button>
+            </div>
 
             <div className="designsPage__body__container">
-                <button onClick={handleResetFilters}>Reset Filters</button>
                 <div className="designsPage__designs_container">
                     {designs.map((design, index) => (
                         <DesignCard
@@ -98,7 +105,7 @@ export function DesignsPage() {
                             DesignImage={design.DesignImage}
                             DesignName={design.DesignName}
                             DesignPrice={design.DesignPrice}
-                            onClick={() => navigate(`/infDesign/${design.id}`)}
+                            onClick={design.onClick}
                         />
                     ))}
                 </div>
@@ -188,7 +195,7 @@ export function DesignsPage() {
 //         <div className="designsPage__body">
 //             <Header></Header>
 //             <SelectFilter optionWordName="Style"
-//                 optionWord="modern" 
+//                 optionWord="modern"
 //                 optionWord2="minimalism"
 //                 value={selectedStyle}
 //                 onChange={handleStyleChange} />

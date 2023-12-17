@@ -3,6 +3,7 @@ import { FooterMedia } from '../../components/FooterMedia/FooterMedia';
 
 import { HeaderText } from "../HeaderText/HeaderText";
 import { Copyright } from "../Copyright/Copyright";
+import infoDesign from "../../../image/infDesign.png"
 // import logotip from "../../../image/logoLitlib.png"
 
 import './DesignCard.scss'
@@ -20,7 +21,7 @@ export function DesignCard(props) {
             <div className="designCard_cont"
                 onClick={handleClick}>
 
-                <div className="designCard__img"> <img src={props.DesignImage} alt="design" className={`designCard__img__picture ${props.styleDesignImage}`}></img></div>
+                <div className="designCard__img"> <img src={infoDesign} alt="design" className={`designCard__img__picture ${props.styleDesignImage}`}></img></div>
                 <div className="designCard__textBlock">
                     <div className={`designCard__textBlock__nameDesign`}>{props.DesignName}</div>
                     <div className={`designCard__textBlock__nameDesigner`}>Designer: {props.DesignerName}</div>

@@ -27,7 +27,8 @@
 
 }
 
-.forgotPasswordForm__button, .logOutButton {
+.forgotPasswordForm__button,
+.logOutButton{
     border: 2px solid white;
     font-size: 32px;
     font-family: Montserrat;
@@ -50,7 +51,18 @@
     height: 74px;
 }
 
-.orderContent__button{
+.informationDesign__button__delete {
+    background-color: transparent;
+    color: rgba(138, 0, 0, 0.99);
+    text-align: center;
+    font-family: Montserrat;
+    font-size: 32px;
+    border: 2px solid rgb(167, 0, 0);
+    width: auto;
+    height: 74px;
+}
+
+.orderContent__button {
     border: 2px solid white;
     font-size: 32px;
     font-family: Montserrat;
@@ -59,5 +71,15 @@
     margin-bottom: 30px;
     background-color: transparent;
     font-weight: bolder;
+    color: white;
+}
+
+.designsPage__body__select__delete{
+    border: 1px solid white;
+    font-size: 32px;
+    font-family: Montserrat;
+    width: auto;
+    height: auto;
+    background-color: transparent;
     color: white;
 }

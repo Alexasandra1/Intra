@@ -1,14 +1,19 @@
-.informationDesign__body{
+.informationDesign__body {
     background: linear-gradient(160deg, #000 14.16%, rgba(0, 0, 0, 0.85) 100%);
 }
 
-.informationDesign__main__container{
+.informationDesign__main__container {
     display: flex;
     flex-direction: row;
     gap: 5%;
-    padding-left: 5%;
+    padding: 5% 0 0 5%;
 }
 
-.informationDesign__main__container__textBlock{
+.informationDesign__main__container__textBlock {
     width: 528px;
+}
+.informationDesign__main__container__textBlock__buttons{
+    gap:10px;
+    display: flex;
+    flex-direction: row;
 }

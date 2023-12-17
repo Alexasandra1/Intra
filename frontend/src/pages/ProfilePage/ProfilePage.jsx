@@ -28,7 +28,7 @@ export function ProfilePage() {
     let id = localStorage.getItem('id');
 
 
-async function navigateAndResetId() {
+    async function navigateAndResetId() {
         localStorage.setItem('id', 0);
         localStorage.setItem('authorization', 0);
         navigate('/main');

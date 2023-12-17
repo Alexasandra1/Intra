@@ -86,7 +86,7 @@
 
 
 @media (max-width: 740px) {
-  .first_type {
-    flex-direction: column
+  .first_type, .second_type {
+    flex-direction: column;
   }
 }

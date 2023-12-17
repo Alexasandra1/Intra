@@ -20,11 +20,11 @@ const app = express();
 const port = process.env.PORT || 3000;
 require('./routes')(app);
 
-// app.use(cors());
+// <3 app.use(cors());
 
 app.use(function (req, res, next) {
   res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'GET');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
   res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
   res.setHeader('Access-Control-Allow-Credentials', true);
   next();

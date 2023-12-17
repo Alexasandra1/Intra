@@ -79,7 +79,11 @@
   text-align: right;
 }
 
-
+@media (max-width: 740px) {
+  .first_type_text, .second_type_text {
+    text-align: center;
+  }
+}
 
 
 // .textBlockMain {
