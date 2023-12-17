@@ -83,7 +83,7 @@ export function InformationDesign() {
                             wordButton="Order"
                             onClick={handleOrderButtonClick} // Добавьте обработчик события для кнопки
                         ></Button>
-                        {isOrderCardVisible && <OrderCard onClose={handleCloseOrderCard} design_id={designInfo.id} />} {/* Покажите OrderCard, если isOrderCardVisible установлен в true */}
+                        {isOrderCardVisible && <OrderCard onClose={handleCloseOrderCard} id={designInfo.id} />} {/* Покажите OrderCard, если isOrderCardVisible установлен в true */}
                     </div>
                 </div>
             </main>

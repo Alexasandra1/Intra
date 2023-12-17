@@ -5,10 +5,10 @@ import toast from 'react-hot-toast';
 
 import './OrderCard.scss'
 
-export function OrderCard({ isOpen, onClose,id }) {
-    const [email, setEmail] = useState('');
-    const [phone, setPhone] = useState('');
-    const [name, setName] = useState('');
+export function OrderCard({ isOpen, onClose, id }) {
+    const [customer_email, setEmail] = useState('');
+    const [customer_phone, setPhone] = useState('');
+    const [customer_name, setName] = useState('');
     const [isEmailValid, setIsEmailValid] = useState(true);
     const [isPhoneValid, setIsPhoneValid] = useState(true);
     const [userData, setUserData] = useState(null);
@@ -20,7 +20,7 @@ export function OrderCard({ isOpen, onClose,id }) {
 
     const orderSend = async () => {
         try {
-            if (name.trim() === "" || phone.trim() === "" || email.trim() === "") {
+            if (customer_name.trim() === "" || customer_phone.trim() === "" || customer_email.trim() === "") {
                 toast.error('Поля не должны быть пустыми');
             }
 
@@ -43,9 +43,9 @@ export function OrderCard({ isOpen, onClose,id }) {
                         'Content-Type': 'application/json',
                     },
                     body: JSON.stringify({
-                        name,
-                        phone,
-                        email,
+                        customer_name,
+                        customer_phone,
+                        customer_email,
                         design_id,
                     }),
                 });
@@ -64,7 +64,7 @@ export function OrderCard({ isOpen, onClose,id }) {
                 }
             }
         } catch (error) {
-            console.error('Ошибка при отправке запроса:', error);
+            toast.error('Ошибка при отправке запроса:', error);
         }
     };
 
@@ -80,7 +80,7 @@ export function OrderCard({ isOpen, onClose,id }) {
                     {
                         placeholder: '  Name',
                         styleInput: 'orderContentForm__input',
-                        value: name,
+                        value: customer_name,
                         onChange: (e) => {
                             setName(e.target.value);
                         }
@@ -88,7 +88,7 @@ export function OrderCard({ isOpen, onClose,id }) {
                     {
                         placeholder: '  Phone',
                         styleInput: 'orderContentForm__input',
-                        value: phone,
+                        value: customer_phone,
                         onChange: (e) => {
                             setPhone(e.target.value);
                             setIsPhoneValid(/^\+375[0-9]{9}$/.test(e.target.value));
@@ -98,7 +98,7 @@ export function OrderCard({ isOpen, onClose,id }) {
                     {
                         placeholder: '  Email',
                         styleInput: 'orderContentForm__input',
-                        value: email,
+                        value: customer_email,
                         onChange: (e) => {
                             setEmail(e.target.value);
                             setIsEmailValid(

@@ -12,6 +12,7 @@ const designphotosRouter = require('../backend/routes/designphotos.routes');
 const designRouter = require('../backend/routes/design.routes');
 const ordersRouter = require('../backend/routes/orders.routes');
 const uploadRouter = require('../backend/routes/upload.route');
+const filterRouter = require('../backend/routes/filter.routes');
 
 
 
@@ -42,6 +43,7 @@ app.use('/api', designphotosRouter);
 app.use('/api', designRouter);
 app.use('/api', ordersRouter);
 app.use('/api', uploadRouter);
+app.use('/api', filterRouter);
 
 // Добавление маршрута для Swagger UI
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));

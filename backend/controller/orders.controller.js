@@ -5,7 +5,7 @@ class OrdersController{
             const { customer_name, customer_phone, customer_email, design_id } = req.body;
                 const newOrder = await db.query('INSERT INTO "Orders" (customer_name, customer_phone, customer_email, design_id) VALUES ($1, $2, $3, $4) RETURNING *', [customer_name, customer_phone, customer_email, design_id]);
                 if (newOrder && newOrder.rows && newOrder.rows.length > 0) {
-                    res.json(newOrder.rows[0]);
+                    res.json({message: 'Заявка успешно отправлена'});
                 } else {
                     res.status(400).json({error: 'Заказ не был создан'});
                 }
