@@ -21,7 +21,7 @@ export function ProfilePage() {
     const [role, setRole] = useState("");
 
     let navigate = useNavigate();
-
+    
     const [img, setImg] = React.useState(null);
     const [avatar, setAvatar] = React.useState(null);
 
@@ -122,6 +122,11 @@ export function ProfilePage() {
         getDesignsByDesignerId();
     }, []);
 
+    
+    async function handleAddDesignClick() {
+        navigate("/addDesign");
+    }
+
     return (
         <div className="body">
             <Header ></Header>
@@ -158,7 +163,7 @@ export function ProfilePage() {
                                 <Button styleButton="logOutButton" wordButton="log out" onClick={() => navigateAndResetId()}></Button>
                             </div>
                         </Popup>
-                        <Button styleButton="addDesignButton" wordButton="Add Design" 
+                        <Button styleButton="addDesignButton" wordButton="Add Design" onClick={handleAddDesignClick}
                         // onClick={() => navigateAndResetId()}
                         ></Button>
                     </div>

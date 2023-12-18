@@ -5,7 +5,7 @@ class DesignController{
             const { name, designer_id, year, style_id, price, photo_id, consultant_id, room_id } = req.body;
                 const newDesign = await db.query('INSERT INTO "Design" (name, designer_id, year, style_id, price, photo_id, consultant_id, room_id) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *', [name, designer_id, year, style_id, price, photo_id, consultant_id, room_id]);
                 if (newDesign && newDesign.rows && newDesign.rows.length > 0) {
-                    res.json(newDesign.rows[0]);
+                    res.json({message:'Дизайн был добавлен в вашу библиотеку'});
                 } else {
                     res.status(400).json({error: 'Дизайн не был создан'});
                 }
