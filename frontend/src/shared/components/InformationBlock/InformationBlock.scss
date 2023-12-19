@@ -15,7 +15,7 @@
 }
 
 .text-blocks {
-  width: 60%;
+  width: 90%;
 }
 
 .first_type {
@@ -47,7 +47,7 @@
   height: 528px;
 }
 
-.instructionType{
+.instructionType {
   display: flex;
   justify-content: center;
 }
@@ -86,7 +86,29 @@
 
 
 @media (max-width: 740px) {
-  .first_type, .second_type {
+
+  .first_type,
+  .second_type {
     flex-direction: column;
+  }
+}
+
+@media (max-width: 530px) {
+  .instructionPage__main__Img {
+    width: 302px;
+    height: 231px;
+    animation: imgLower 0.5s;
+  }
+}
+
+@keyframes imgLower {
+  0% {
+    width: 529px;
+    height: 386px;
+  }
+
+  100% {
+    width: 302px;
+    height: 231px;
   }
 }

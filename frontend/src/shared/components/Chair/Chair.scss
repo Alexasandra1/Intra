@@ -26,6 +26,11 @@
       font-size: 96px;
       animation: textAnimationLower1 0.5s;
   }
+  .chair__img{
+    height: 800px;
+    // width: 720px;
+    animation: chairAnimation 0.5s;
+}
 }
 
 @media (max-width: 800px) {
@@ -33,6 +38,11 @@
         font-size: 40px;
         animation: textAnimationLower2 0.5s;
     }
+    .chair__img{
+      height: 700px;
+      width: 320px;
+      animation: chairAnimation2 0.5s;
+  }
   }
 
   @keyframes textAnimationLower1 {
@@ -50,5 +60,25 @@
     }
     100% {
       font-size: 40px;
+    }
+  }
+
+  @keyframes chairAnimation {
+    0% {
+      height: 854px;
+    }
+    100% {
+      height: 800px;
+      width: 720px;
+    }
+  }
+
+  @keyframes chairAnimation2 {
+    0% {
+      height: 800px;
+    }
+    100% {
+      height: 700px;
+      width: 320px; 
     }
   }

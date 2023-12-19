@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import chair from "../../../image/chair.png"
+import chair from "../../../image/chair2.png"
 
 import './Chair.scss'
 
