@@ -99,6 +99,10 @@
     height: 231px;
     animation: imgLower 0.5s;
   }
+  .aboutUs__firstImg{
+    width: 320px;
+    animation: imgAboutLower 0.5s;
+  }
 }
 
 @keyframes imgLower {
@@ -110,5 +114,15 @@
   100% {
     width: 302px;
     height: 231px;
+  }
+}
+
+@keyframes imgAboutLower {
+  0% {
+    width: 410px;
+  }
+
+  100% {
+    width: 320px;
   }
 }
