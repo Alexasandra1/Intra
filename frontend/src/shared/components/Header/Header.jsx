@@ -63,7 +63,7 @@ export function Header() {
                     {/* <HeaderText word="Log In" onClick={handleLoginClick}
                         style={currentPage === "/login" ? "selectedStyle" : ""}/> */}
                 </div>
-                <Burger items={[{ text: 'Designs', link: '' },{ text: 'Instruction', link: '/instruction' },{ text: 'About Us', link: '/aboutus' }, { text: isAuthorized ? 'Profile' : 'Log In', link: isAuthorized ? '/profile' : '/login' }, ]}></Burger>
+                <Burger items={[{ text: 'Designs', link: '/design' },{ text: 'Instruction', link: '/instruction' },{ text: 'About Us', link: '/aboutus' }, { text: isAuthorized ? 'Profile' : 'Log In', link: isAuthorized ? '/profile' : '/login' }, ]}></Burger>
                 
             </div>
         </header>

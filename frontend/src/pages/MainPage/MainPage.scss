@@ -7,6 +7,8 @@
     background: linear-gradient(160deg, #000 14.16%, rgba(0, 0, 0, 0.85) 100%);
     // background: linear-gradient(90deg, #000 14.16%, rgba(0, 0, 0, 0.85) 100%);
     width: 100%;
+    position: relative;
+    z-index: 1;
 }
 
 .mainpage__main__container {
@@ -18,11 +20,11 @@
     // align-items: baseline;
 }
 
-.mainpage__main{
-    position: relative;
-    z-index: 1;
+// .mainpage__main{
+//     position: relative;
+//     z-index: 1;
 
-}
+// }
 
 // .mainpage__main__container__cardFisrt,
 // .mainpage__main__container__cardSecond,

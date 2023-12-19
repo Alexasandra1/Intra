@@ -25,8 +25,10 @@
 .designs_container{
     display: flex;
     flex-direction: row;
-    width: 1182px;
-    height: 340px;
+    flex-wrap: wrap;
+    justify-content: center;
+    // width: 1182px;
+    // height: 340px;
     overflow: scroll;
     overflow-y: hidden;
 }
@@ -42,6 +44,8 @@
 .profilePage__main__container__button {
     display: flex;
     flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
     gap: 30px;
     padding-bottom: 15px;
 
