@@ -118,7 +118,7 @@ export function AddDesignPage() {
                             <option value='2'>Minimalism</option>
                         </select>
 
-                        <select value={room_id} onChange={handleRoomChange}>
+                        <select className="addDesignPage__body__formContainer__secondSelect" value={room_id} onChange={handleRoomChange}>
                             <option value=''>Select room type</option>
                             <option value='1'>Kichen</option>
                             {/* <option value='3'>Fl</option>

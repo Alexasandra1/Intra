@@ -1,5 +1,6 @@
 .logInPage__body__form__password,
 .logInPage__body__form__login {
+    width: 100%;
     height: 74px;
     background: transparent;
     color: rgba(255, 255, 255, 0.70);
@@ -13,7 +14,7 @@
     margin-bottom: 33px;
 }
 
-.logInPage__body__form__password{
+.logInPage__body__form__password {
     margin-bottom: 51px;
 }
 
@@ -35,8 +36,8 @@
 .registrationPage__body__form__password,
 .registrationPage__body__form__city,
 .registrationPage__body__form__email,
-    .registrationPage__body__form__number{
-        width: 100%;
+.registrationPage__body__form__number {
+    width: 100%;
     height: 4.625rem;
     color: rgb(249, 250, 250);
     background-color: transparent;
@@ -48,7 +49,7 @@
 }
 
 
-.forgotPasswordForm__input{
+.forgotPasswordForm__input {
     width: 100%;
     border: 2px solid black;
     background-color: #cecece;
@@ -61,13 +62,13 @@
     text-align: left;
 }
 
-.forgotPasswordForm__input::placeholder{
+.forgotPasswordForm__input::placeholder {
     color: black;
     font-weight: bolder;
 }
 
 
-.orderContentForm__input{
+.orderContentForm__input {
     width: 80%;
     border: 2px solid rgb(255, 255, 255);
     background-color: transparent;
@@ -85,7 +86,7 @@
 .addDesignPage__body__form__price,
 .addDesignPage__body__form__designer,
 .addDesignPage__body__form__style,
-.addDesignPage__body__form__year{
+.addDesignPage__body__form__year {
     width: 100%;
     height: 4.625rem;
     color: rgb(249, 250, 250);

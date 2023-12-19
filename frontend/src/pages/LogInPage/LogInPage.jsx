@@ -65,11 +65,14 @@ export function LogInPage() {
             <Header></Header>
             <div className="logInPage__body__intra"> INTRA </div>
             <div className="logInPage__body__create">Create your dream house</div>
-
-            <Form inputs={[
+            <div className="logInPage__body__formContainer">
+            <Form formClass="logInPage__body__form" inputs={[
                 { placeholder: '  Login', styleInput: 'logInPage__body__form__login', value: login, onChange: e => setLogin(e.target.value) },
                 { placeholder: '  Password', styleInput: 'logInPage__body__form__password', value: password, onChange: e => setPassword(e.target.value) },
             ]} />
+
+            </div>
+
 
             <div className="forgot-password" onClick={openModal}>Forgot Password?</div>
 
