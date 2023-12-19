@@ -33,25 +33,35 @@ export function ProfilePage() {
         localStorage.setItem('authorization', 0);
         navigate('/main');
     }
+    const createPdf = async () => {
+        const data = [`Name: ${name}`, `City: ${city}`, `Phone: ${phone}`, `Email: ${email}`];
+        await fetch('http://localhost:3000/create-pdf', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ data })
+        });
+    }
 
-    const sendFile = React.useCallback(async () => {
-        try {
-            const formData = new FormData()
+    // const sendFile = React.useCallback(async () => {
+    //     try {
+    //         const formData = new FormData()
 
-            formData.append('avatar', img);
-            // formData.append(`filename`, `${id}.png`);
+    //         formData.append('avatar', img);
+    //         // formData.append(`filename`, `${id}.png`);
 
-            await fetch('http://localhost:3000/api/UploadAvatar', {
-                method: 'POST',
-                headers: {
-                    'content-type': 'mulpipart/form-data'
-                },
-                body: formData
+    //         await fetch('http://localhost:3000/api/UploadAvatar', {
+    //             method: 'POST',
+    //             headers: {
+    //                 'content-type': 'mulpipart/form-data'
+    //             },
+    //             body: formData
 
-            })
-                .then(res => setAvatar(res.data.path))
-        } catch (error) { }
-    }, [img])
+    //         })
+    //             .then(res => setAvatar(res.data.path))
+    //     } catch (error) { }
+    // }, [img])
 
     useEffect(() => {
         async function getDesignsByDesignerId() {
@@ -140,10 +150,16 @@ export function ProfilePage() {
                                     : <img src={avatar_q} alt="user" className="profilePage__main__container__avatarka__picture__img" />
                             }
                         </div>
-                        <input type="file" onChange={e => {
+                        {/* <input type="file" onChange={e => {
                             setImg(e.target.files[0]);
-                        }} />
-                        <Button wordButton="kjgkj" onClick={sendFile} />
+                        }} /> */}
+                          <Button
+                            styleButton="profilePage__main__container__buttonInformation"
+                            wordButton="Dowload Information"
+                            onClick={createPdf}
+                        // onClick={()=>createAndDownloadDocx(designInfo,designerData,styleData,id )}
+                        ></Button>
+                        {/* <Button wordButton="kjgkj" onClick={sendFile} /> */}
                         <div className="profilePage__main__container__avatarka__text">{name}
                             {/* Michael Snow */}
                         </div>

@@ -2,6 +2,11 @@ const express = require('express');
 const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('./swagger'); // Импорт вашей Swagger спецификации
 const path = require('path');
+const cors = require('cors');
+const pdf = require('pdfkit');
+const fs = require('fs');
+const bodyParser = require('body-parser');
+
 
 const styleRouter = require('../backend/routes/style.routes');
 const roleRouter = require('../backend/routes/role.routes');
@@ -21,7 +26,7 @@ const port = process.env.PORT || 3000;
 require('./routes')(app);
 
 // <3 app.use(cors());
-
+app.use(bodyParser.json());
 app.use(function (req, res, next) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
@@ -29,6 +34,26 @@ app.use(function (req, res, next) {
   res.setHeader('Access-Control-Allow-Credentials', true);
   next();
 });
+
+app.post('/create-pdf', (req, res) => {
+  let doc = new pdf;
+  
+  const date = new Date();
+  const fileName = `file_${date.getTime()}.pdf`;
+  
+  const filePath = path.join(__dirname, 'files', fileName);
+  doc.pipe(fs.createWriteStream(filePath));
+  
+  req.body.data.forEach(item => {
+    doc.text(item);
+    doc.moveDown();
+  });
+
+  doc.end();
+  res.send('PDF Created');
+});
+
+
 
 app.use(express.json());
 
