@@ -16,6 +16,8 @@
     gap:10px;
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
 
@@ -33,3 +35,41 @@ h2{
     color: azure;
     font-family: Montserrat;
 }
+
+
+@media (max-width: 1440px) {
+
+    .informationDesign__main__container  {
+      flex-direction: column;
+      justify-content: center;
+      padding: 2% 0 0 0;
+    }
+    .informationDesign__main__container__textBlock{
+        width: 100%;
+
+    }
+    .informationDesign__main__container__textBlock__buttons{
+        display: flex;
+        justify-content: center;
+    }
+  }
+
+  @media (max-width: 700px) {
+
+    .informationDesignmaincontainer__pictures__img {
+        width: 320px;
+        height: 296px;
+        animation: imgAnimationInTheInfDesign 0.5s;
+    }
+  }
+
+  @keyframes imgAnimationInTheInfDesign {
+    0% {
+        width: 653px;
+        height: 588px;
+    }
+    100% {
+        width: 320px;
+        height: 296px;
+    }
+  }

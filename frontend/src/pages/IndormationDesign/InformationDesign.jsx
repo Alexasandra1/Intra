@@ -102,151 +102,146 @@ export function InformationDesign() {
     // } catch (error) {
     //     console.error('Ошибка:', error);
     // }
-// };
+    // };
 
-// function createAndDownloadDocx(designInfo,designerData,styleData,id ){
-//     const doc = new Document();
-//     doc.addSection({
-//         children:[
-//             new Paragraph("Dessign name: "+ designInfo.name),
-//             new Paragraph("Designer name: "+ designerData.name),
-//             new Paragraph("Style name: "+ styleData.style_name),
-//             new Paragraph("Year : "+ designInfo.year),
-//             new Paragraph("Price : "+ designInfo.price),
-//         ],
-//     });
+    // function createAndDownloadDocx(designInfo,designerData,styleData,id ){
+    //     const doc = new Document();
+    //     doc.addSection({
+    //         children:[
+    //             new Paragraph("Dessign name: "+ designInfo.name),
+    //             new Paragraph("Designer name: "+ designerData.name),
+    //             new Paragraph("Style name: "+ styleData.style_name),
+    //             new Paragraph("Year : "+ designInfo.year),
+    //             new Paragraph("Price : "+ designInfo.price),
+    //         ],
+    //     });
 
-//     Packer.toBlob(doc).then(blob=>{
-//         saveAs(blob, `DesignInfo${id}.docx`);
-//     });
-// }
+    //     Packer.toBlob(doc).then(blob=>{
+    //         saveAs(blob, `DesignInfo${id}.docx`);
+    //     });
+    // }
 
-useEffect(() => {
-    async function fetchDesignInfo() {
-        try {
-            const response = await fetch(`http://localhost:3000/api/GetDesign/${id}`);
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-            const designData = await response.json();
-            setDesignInfo(designData);
-
-            if (user_id) {
-                const userResponse = await fetch(`http://localhost:3000/api/GetIntraUser/${user_id}`);
-                if (!userResponse.ok) {
+    useEffect(() => {
+        async function fetchDesignInfo() {
+            try {
+                const response = await fetch(`http://localhost:3000/api/GetDesign/${id}`);
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
                 }
-                const userData = await userResponse.json();
-                setUserData(userData);
-            }
+                const designData = await response.json();
+                setDesignInfo(designData);
 
-            if (designData.style_id) {
-                const styleResponse = await fetch(`http://localhost:3000/api/GetStyle/${designData.style_id}`);
-                if (!styleResponse.ok) {
-                    throw new Error(`HTTP error! status: ${styleResponse.status}`);
+                if (user_id) {
+                    const userResponse = await fetch(`http://localhost:3000/api/GetIntraUser/${user_id}`);
+                    if (!userResponse.ok) {
+                    }
+                    const userData = await userResponse.json();
+                    setUserData(userData);
                 }
-                const styleData = await styleResponse.json();
-                setStyleData(styleData);
-            }
 
-
-            if (designData.designer_id) {
-                const designerResponse = await fetch(`http://localhost:3000/api/GetIntraUser/${designData.designer_id}`);
-                if (!designerResponse.ok) {
-                    throw new Error(`HTTP error! status: ${designerResponse.status}`);
+                if (designData.style_id) {
+                    const styleResponse = await fetch(`http://localhost:3000/api/GetStyle/${designData.style_id}`);
+                    if (!styleResponse.ok) {
+                        throw new Error(`HTTP error! status: ${styleResponse.status}`);
+                    }
+                    const styleData = await styleResponse.json();
+                    setStyleData(styleData);
                 }
-                const designerData = await designerResponse.json();
-                setDesignerData(designerData);
+
+
+                if (designData.designer_id) {
+                    const designerResponse = await fetch(`http://localhost:3000/api/GetIntraUser/${designData.designer_id}`);
+                    if (!designerResponse.ok) {
+                        throw new Error(`HTTP error! status: ${designerResponse.status}`);
+                    }
+                    const designerData = await designerResponse.json();
+                    setDesignerData(designerData);
+                }
+
+
+            } catch (error) {
+                console.error('Ошибка:', error);
             }
-
-
-        } catch (error) {
-            console.error('Ошибка:', error);
         }
-    }
 
-    if (id) {
-        fetchDesignInfo();
-    }
+        if (id) {
+            fetchDesignInfo();
+        }
 
-}, [id]);
-
-
-const handleOrderButtonClick = () => {
-    setIsOrderCardVisible(true);
-};
-
-const handleCloseOrderCard = () => {
-    setIsOrderCardVisible(false);
-};
+    }, [id]);
 
 
-return (
-    <div className="informationDesign__body">
-        <Header></Header>
-        <main className="informationDesign__main">
-            <div className="informationDesign__main__container">
-                <div className="informationDesign__main__container__pictures">
-                    <img src={infoDesign} alt="design" className="informationDesignmaincontainer__pictures__img"></img>
-                </div>
-                <div className="informationDesign__main__container__textBlock">
-                    {designInfo && styleData && designerData && (
-                        <TextBlocInInformationDesign
-                            titleStyleTextBlocInInformationDesign={designInfo.name}
-                            designerStyleTextBlocInInformationDesign={designerData.name}
-                            styleStyleTextBlocInInformationDesign={styleData.style_name}
-                            yearStyleTextBlocInInformationDesign={designInfo.year}
-                            priceStyleTextBlocInInformationDesign={designInfo.price}
-                        />
-                    )}
-                    <div className="informationDesign__main__container__textBlock__buttons">
-                        <Button
-                            styleButton="informationDesign__button"
-                            wordButton="Order"
-                            onClick={handleOrderButtonClick}
-                        ></Button>
-                         {/* <Button
-                            styleButton="informationDesign__button"
-                            wordButton="Dowload Report1"
-                            onClick={ createAndDownloadDocx}
-                        ></Button> */}
-                        <Button
-                            styleButton="informationDesign__button"
-                            wordButton="Dowload Report"
-                            onClick={createPdf}
-                        // onClick={()=>createAndDownloadDocx(designInfo,designerData,styleData,id )}
-                        ></Button>
-                        {(user_id == designerData?.id || userData?.role_id == 2) && (
-                            <>
+    const handleOrderButtonClick = () => {
+        setIsOrderCardVisible(true);
+    };
 
-                                <Button
-                                    styleButton="informationDesign__button__delete"
-                                    wordButton="?"
-                                    onClick={handleOpen} />
+    const handleCloseOrderCard = () => {
+        setIsOrderCardVisible(false);
+    };
 
-                                <Popup className="popupToDelete" open={isOpen} closeOnDocumentClick onClose={handleClose}>
-                                    <div className="popup__content">
-                                        <h2>Are you sure you want to delete?</h2>
-                                        <Button
-                                            styleButton="informationDesign__button"
-                                            wordButton="Yes"
-                                            onClick={handleConfirmed}
-                                        ></Button>
-                                        <Button
-                                            styleButton="informationDesign__button"
-                                            wordButton="No"
-                                            onClick={handleClose}
-                                        ></Button>
-                                        {/* <button onClick={handleConfirmed}>Yes</button>
-                                    <button onClick={handleClose}>Cancel</button> */}
-                                    </div>
-                                </Popup>
-                            </>)}
+
+    return (
+        <div className="informationDesign__body">
+            <Header></Header>
+            <main className="informationDesign__main">
+                <div className="informationDesign__main__container">
+                    <div className="informationDesign__main__container__pictures">
+                        <img src={infoDesign} alt="design" className="informationDesignmaincontainer__pictures__img"></img>
                     </div>
-                    {isOrderCardVisible && <OrderCard onClose={handleCloseOrderCard} id={designInfo.id} />} {/* Покажите OrderCard, если isOrderCardVisible установлен в true */}
+                    <div className="informationDesign__main__container__textBlock">
+                        {designInfo && styleData && designerData && (
+                            <TextBlocInInformationDesign
+                                titleStyleTextBlocInInformationDesign={designInfo.name}
+                                designerStyleTextBlocInInformationDesign={designerData.name}
+                                styleStyleTextBlocInInformationDesign={styleData.style_name}
+                                yearStyleTextBlocInInformationDesign={designInfo.year}
+                                priceStyleTextBlocInInformationDesign={designInfo.price}
+                            />
+                        )}
+                        <div className="informationDesign__main__container__textBlock__buttons">
+                            <Button
+                                styleButton="informationDesign__button"
+                                wordButton="Order"
+                                onClick={handleOrderButtonClick}
+                            ></Button>
+                            <Button
+                                styleButton="informationDesign__button"
+                                wordButton="Dowload Report"
+                                onClick={createPdf}
+                            // onClick={()=>createAndDownloadDocx(designInfo,designerData,styleData,id )}
+                            ></Button>
+                            {(user_id == designerData?.id || userData?.role_id == 2) && (
+                                <>
+
+                                    <Button
+                                        styleButton="informationDesign__button__delete"
+                                        wordButton="?"
+                                        onClick={handleOpen} />
+
+                                    <Popup className="popupToDelete" open={isOpen} closeOnDocumentClick onClose={handleClose}>
+                                        <div className="popup__content">
+                                            <h2>Are you sure you want to delete?</h2>
+                                            <Button
+                                                styleButton="informationDesign__button"
+                                                wordButton="Yes"
+                                                onClick={handleConfirmed}
+                                            ></Button>
+                                            <Button
+                                                styleButton="informationDesign__button"
+                                                wordButton="No"
+                                                onClick={handleClose}
+                                            ></Button>
+                                            {/* <button onClick={handleConfirmed}>Yes</button>
+                                    <button onClick={handleClose}>Cancel</button> */}
+                                        </div>
+                                    </Popup>
+                                </>)}
+                        </div>
+                        {isOrderCardVisible && <OrderCard onClose={handleCloseOrderCard} id={designInfo.id} />} {/* Покажите OrderCard, если isOrderCardVisible установлен в true */}
+                    </div>
                 </div>
-            </div>
-        </main>
-        <Footer></Footer>
-    </div>
-);
+            </main>
+            <Footer></Footer>
+        </div>
+    );
 }
