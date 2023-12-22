@@ -1,7 +1,7 @@
 const pgp = require('pg').Pool
 const db = new pgp({
     user: 'postgres',
-    password: 'oxyennozaebic',
+    password: 'your password',
     host: 'localhost',
     port: 5432,
     database: 'IntraDb'
